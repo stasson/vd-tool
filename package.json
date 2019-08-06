@@ -41,5 +41,8 @@
     "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "execa": "^2.0.3"
   }
 }
