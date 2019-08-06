@@ -1,0 +1,29 @@
+{
+  "name": "vd-tool",
+  "version": "3.2.1",
+  "description": "Android Studio Vector Drawable tool",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "bin": "bin"
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stasson/vd-tool.git"
+  },
+  "keywords": [
+    "Android",
+    "Vector",
+    "Drawable",
+    "svg",
+    "vd-tool"
+  ],
+  "author": "sebastien.tasson@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stasson/vd-tool/issues"
+  },
+  "homepage": "https://github.com/stasson/vd-tool#readme"
+}
