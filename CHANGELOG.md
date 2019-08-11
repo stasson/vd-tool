@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.2.5](https://github.com/stasson/vd-tool/compare/v3.2.4...v3.2.5) (2019-08-11)
+
+
+### Bug Fixes
+
+* add install script to force permissions ([6df2f34](https://github.com/stasson/vd-tool/commit/6df2f34))
+
 ### [3.2.4](https://github.com/stasson/vd-tool/compare/v3.2.3...v3.2.4) (2019-08-10)
 
 
