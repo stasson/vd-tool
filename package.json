@@ -9,7 +9,8 @@
     "dist",
     "bin",
     "lib",
-    "cli.js"
+    "cli.js",
+    "install.js"
   ],
   "bin": "cli.js",
   "main": "./dist/index.js",
@@ -18,6 +19,7 @@
     "build": "tsc",
     "test": "jest",
     "prepack": "tsc",
+    "install": "node install.js",
     "release": "standard-version"
   },
   "repository": {
