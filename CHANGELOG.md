@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://github.com/stasson/vd-tool/compare/v3.2.5...v3.4.0) (2019-08-12)
+
+
+### Features
+
+* upgrade vd-tool to 3.4.0 ([2f9b021](https://github.com/stasson/vd-tool/commit/2f9b021))
+
 ### [3.2.5](https://github.com/stasson/vd-tool/compare/v3.2.4...v3.2.5) (2019-08-11)
 
 

@@ -12,7 +12,7 @@ export async function vdTool(
   options?: execa.Options
 ) {
   const file = path.join(__dirname, '..', 'bin', 'vd-tool')
-  if (!options) options = { stderr: process.stderr }
+  if (!options) options = { stderr: process.stderr, stdout: process.stdout }
   Object.assign(options, { shell: true })
   return await execa(file, args, options)
 }
@@ -22,6 +22,8 @@ type VdConvertOptions = {
   width?: number      // forces width in DP
   height?: number     // forces height in DP
   addHeader?: boolean // add AOSP header
+  stdout?: execa.StdioOption // default to pipe
+  stderr?: execa.StdioOption // default to pipe
 }
 
 /**
@@ -35,11 +37,11 @@ export async function vdConvert(
   options: VdConvertOptions = {}
 ) {
   const args = ['-c']
-  const { outDir, width, height, addHeader } = options
+  const { outDir, width, height, addHeader, stderr, stdout} = options
   args.push('-in', String(input))
   if (outDir) args.push('-out', String(outDir))
   if (width) args.push('-widthDp', String(width))
   if (height) args.push('-heightDp', String(height))
   if (addHeader) args.push('--addHeader')
-  return vdTool(args)
+  return vdTool(args, {stderr, stdout})
 }
