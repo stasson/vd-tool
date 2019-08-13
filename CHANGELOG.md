@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.4.1](https://github.com/stasson/vd-tool/compare/v3.4.0...v3.4.1) (2019-08-13)
+
+
+### Bug Fixes
+
+* vdconvert properly returns errors ([4ccce23](https://github.com/stasson/vd-tool/commit/4ccce23))
+
 ## [3.4.0](https://github.com/stasson/vd-tool/compare/v3.2.5...v3.4.0) (2019-08-12)
 
 
