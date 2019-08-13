@@ -1,13 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`tests converts svg 1`] = `
-"-c parsed, so we will convert the SVG files
--in parsed C:\\\\workspace\\\\github\\\\vd-tool\\\\tests\\\\fixture\\\\icon.svg
--out parsed C:\\\\workspace\\\\github\\\\vd-tool\\\\tests\\\\output
-Convert 1 SVG files in total, errors found in 0 files"
-`;
-
-exports[`tests converts svg 2`] = `
 "<vector xmlns:android=\\"http://schemas.android.com/apk/res/android\\"
     android:width=\\"504dp\\"
     android:height=\\"672dp\\"

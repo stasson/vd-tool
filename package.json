@@ -54,6 +54,7 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "execa": "^2.0.3"
+    "execa": "^2.0.3",
+    "upath": "^1.1.2"
   }
 }

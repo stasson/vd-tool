@@ -7,35 +7,37 @@ describe('tests', () => {
     const fixture = path.join(__dirname, 'fixture', 'icon.svg')
     const outDir = path.join(__dirname, 'output')
     const result = await vdConvert(fixture, { outDir })
-    expect(result && result.exitCode).toEqual(0)
-    expect(result.stdout).toMatchSnapshot()
+    expect(result.input).toMatch(/icon.svg/)
+    expect(result.output).toMatch(/icon.xml/)
+    expect(result.errors).toBeUndefined()
+    expect(result.warnings).toBeUndefined()
     const xml = fs.readFileSync(
       path.join(__dirname, 'output', 'icon.xml'),
       'utf8'
     )
     expect(xml).toMatchSnapshot()
-  })
+  }, 19999)
 
   it('reports errors and warnings', async () => {
     const fixture = path.join(__dirname, 'fixture', 'errors.svg')
     const outDir = path.join(__dirname, 'output')
     const result = await vdConvert(fixture, { outDir })
-    expect(result && result.exitCode).toEqual(0)
-    expect(result.stdout).toMatchInlineSnapshot(`
-      "-c parsed, so we will convert the SVG files
-      -in parsed C:\\\\workspace\\\\github\\\\vd-tool\\\\tests\\\\fixture\\\\errors.svg
-      -out parsed C:\\\\workspace\\\\github\\\\vd-tool\\\\tests\\\\output
-      Convert 1 SVG files in total, errors found in 1 files"
+    expect(result.input).toMatch(/errors.svg/)
+    expect(result.output).toMatch(/errors.xml/)
+    expect(result.errors).toMatchInlineSnapshot(`
+      Array [
+        "ERROR @ line 11: <mask> is not supported",
+      ]
     `)
-    expect(result.stderr).toMatchInlineSnapshot(`
-      "error is In errors.svg:
-      ERROR @ line 11: <mask> is not supported
-      WARNING @ line 7: Scaling of the stroke width is ignored"
+    expect(result.warnings).toMatchInlineSnapshot(`
+      Array [
+        "WARNING @ line 7: Scaling of the stroke width is ignored",
+      ]
     `)
     const xml = fs.readFileSync(
       path.join(__dirname, 'output', 'errors.xml'),
       'utf8'
     )
     expect(xml).toMatchSnapshot()
-  })
+  }, 19999)
 })

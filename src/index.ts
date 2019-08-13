@@ -1,9 +1,9 @@
-import path from 'path'
+import path from 'upath'
 import execa from 'execa'
 
 /**
  * spawn vd-tool process
- * 
+ *
  * @param args vd-tool cli args
  * @param options execa options
  */
@@ -18,30 +18,48 @@ export async function vdTool(
 }
 
 type VdConvertOptions = {
-  outDir?: string     // output dir path
-  width?: number      // forces width in DP
-  height?: number     // forces height in DP
+  outDir?: string // output dir path
+  width?: number // forces width in DP
+  height?: number // forces height in DP
   addHeader?: boolean // add AOSP header
-  stdout?: execa.StdioOption // default to pipe
-  stderr?: execa.StdioOption // default to pipe
 }
 
+type VdConvertResult = {
+  input: string
+  output: string
+  warnings?: string[]
+  errors?: string[]
+}
+
+
 /**
- * SVG to Vector Drawable conversion 
- * 
+ * SVG to Vector Drawable conversion
+ *
  * @param input file or directory path
  * @param options VdConvertOptions
  */
-export async function vdConvert(
-  input: string,
-  options: VdConvertOptions = {}
-) {
+export async function vdConvert(input: string, options: VdConvertOptions = {}) {
   const args = ['-c']
-  const { outDir, width, height, addHeader, stderr, stdout} = options
+  const { outDir, width, height, addHeader} = options
   args.push('-in', String(input))
   if (outDir) args.push('-out', String(outDir))
   if (width) args.push('-widthDp', String(width))
   if (height) args.push('-heightDp', String(height))
   if (addHeader) args.push('--addHeader')
-  return vdTool(args, {stderr, stdout})
+  const {stderr} = await  vdTool(args, { stderr: 'pipe', stdout:'pipe' })
+  const {dir, name} = path.parse(input)
+  const output = path.join(outDir || dir, name) + '.xml'
+  const result: VdConvertResult = {input, output}
+  const errors: string[] = []  
+  const warnings: string[] = []  
+
+  for (const line of stderr.split(/\r?\n/)){
+    if (line.startsWith('ERROR')) errors.push(line)
+    else if (line.startsWith('WARNING')) warnings.push(line)
+  }
+  
+  if (errors.length) result.errors = errors
+  if (warnings.length) result.warnings = warnings
+
+  return result
 }
