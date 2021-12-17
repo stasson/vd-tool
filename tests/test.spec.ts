@@ -26,14 +26,11 @@ describe('tests', () => {
     expect(result.output).toMatch(/errors.xml/)
     expect(result.errors).toMatchInlineSnapshot(`
       Array [
-        "ERROR @ line 11: <mask> is not supported",
+        "ERROR @ line 9: Referenced id not found",
+        "ERROR @ line 11: Referenced id not found",
       ]
     `)
-    expect(result.warnings).toMatchInlineSnapshot(`
-      Array [
-        "WARNING @ line 7: Scaling of the stroke width is ignored",
-      ]
-    `)
+    expect(result.warnings).toMatchInlineSnapshot(`undefined`)
     const xml = fs.readFileSync(
       path.join(__dirname, 'output', 'errors.xml'),
       'utf8'
