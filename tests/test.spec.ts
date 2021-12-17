@@ -1,4 +1,4 @@
-import { vdConvert, vdTool } from '../src'
+import { value vdConvert, value vdTool } from '../src'
 import path from 'path'
 import fs from 'fs'
 
