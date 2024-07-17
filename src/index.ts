@@ -1,5 +1,5 @@
 import path from 'upath'
-import execa from 'execa'
+import {execa, parseCommandString, Options} from 'execa'
 
 /**
  * spawn vd-tool process
@@ -9,11 +9,12 @@ import execa from 'execa'
  */
 export async function vdTool(
   args?: readonly string[],
-  options?: execa.Options
+  options?: Options
 ) {
   const file = path.join(__dirname, '..', 'bin', 'vd-tool')
   if (!options) options = { stderr: process.stderr, stdout: process.stdout }
   Object.assign(options, { shell: true })
+
   return await execa(file, args, options)
 }
 
@@ -46,16 +47,18 @@ export async function vdConvert(input: string, options: VdConvertOptions = {}) {
   if (width) args.push('-widthDp', String(width))
   if (height) args.push('-heightDp', String(height))
   if (addHeader) args.push('--addHeader')
-  const {stderr} = await  vdTool(args, { stderr: 'pipe', stdout:'pipe' })
+  const {stderr} = await vdTool(args, { stderr: 'pipe', stdout:'pipe' })
   const {dir, name} = path.parse(input)
   const output = path.join(outDir || dir, name) + '.xml'
   const result: VdConvertResult = {input, output}
   const errors: string[] = []  
   const warnings: string[] = []  
 
-  for (const line of stderr.split(/\r?\n/)){
-    if (line.startsWith('ERROR')) errors.push(line)
-    else if (line.startsWith('WARNING')) warnings.push(line)
+  if (typeof stderr === 'string') {
+    for (const line of stderr.split(/\r?\n/)) {
+      if (line.startsWith('ERROR')) errors.push(line);
+      else if (line.startsWith('WARNING')) warnings.push(line);
+    }
   }
   
   if (errors.length) result.errors = errors
